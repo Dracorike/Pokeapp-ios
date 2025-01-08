@@ -23,7 +23,7 @@ struct PokemonCard: View {
             VStack {
                 TypeChip(chipInfo: pokemon.types.first!)
                 if pokemon.types.count > 1 {
-                    TypeChip(chipInfo: PokemonModel.mock().types.last!)
+                    TypeChip(chipInfo: pokemon.types.last!)
                 } else {
                     Spacer().frame(height: 35)
                 }
