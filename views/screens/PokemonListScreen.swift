@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PokemonListScreen : View{
     var pokemonList: [PokemonModel]
+    var callMorePokemons: (PokemonModel) -> Void
     
     var body: some View {
         NavigationSplitView {
@@ -18,9 +19,13 @@ struct PokemonListScreen : View{
                         PokemonInfoScreen(pokemonInfo: pokemon)
                     } label: {
                         PokemonCard(pokemon: pokemon)
+                            .onAppear {
+                                callMorePokemons(pokemon)
+                            }
                     }
                 }
-            }.navigationTitle(Text("Pokemon List"))
+            }
+            .navigationTitle(Text("Pokemon List"))
         } detail: {
             Text("Select a Pokemon")
         }
@@ -32,5 +37,5 @@ struct PokemonListScreen : View{
         PokemonModel.mock(),
         PokemonModel.mock(),
         PokemonModel.mock()
-    ])
+    ], callMorePokemons: { poke in })
 }

@@ -6,5 +6,6 @@
 //
 
 protocol PokemonService {
-    func fetchPokemonList() async throws -> [PokemonModel]
+    func fetchPokemonList() async -> [PokemonModel]
+    func fetchNextPokemonList() async -> [PokemonModel]
 }

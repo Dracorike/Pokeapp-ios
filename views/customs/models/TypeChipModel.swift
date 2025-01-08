@@ -76,7 +76,6 @@ enum TypePokemonColor {
 
 extension String {
     func toTypePokemonColor() -> TypePokemonColor {
-        print(self)
         switch self {
             case "normal": return .normal
             case "fighting": return .fighting

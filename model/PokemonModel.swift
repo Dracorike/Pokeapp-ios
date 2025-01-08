@@ -11,8 +11,18 @@ class PokemonModel : Identifiable {
     var imageUrl: String
     var types: [TypeChipModel]
     var stats: PokeStatsModel
+    var nextPokemonList:String?
+    var previousPokemonList:String?
     
-    init(id: Int, name: String, imageUrl: String, types: [TypeChipModel], stats:PokeStatsModel) {
+    init(
+        id: Int,
+        name: String,
+        imageUrl: String,
+        types: [TypeChipModel],
+        stats:PokeStatsModel,
+        nextPokemonList:String? = nil,
+        previousPokemonList:String? = nil
+    ) {
         self.id = id
         self.name = name
         self.imageUrl = imageUrl

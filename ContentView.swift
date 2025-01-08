@@ -11,7 +11,14 @@ struct ContentView: View {
     @ObservedObject var viewModel: PokemonMainViewModel
     
     var body: some View {
-        PokemonListScreen(pokemonList: viewModel.pokemons).onAppear {
+        PokemonListScreen(
+            pokemonList: viewModel.pokemons,
+            callMorePokemons: { pokemon in
+                if viewModel.canCallNextPokemonList(pokemon: pokemon) {
+                    viewModel.callNextPokemonList()
+                }
+            }
+        ).onAppear {
             viewModel.callPokemonList()
         }
     }
