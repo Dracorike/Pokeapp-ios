@@ -14,6 +14,7 @@ struct PokemonCard: View {
             AsyncImage(url: URL(string: pokemon.imageUrl)) { image in
                 image
                     .frame(width: 50, height: 50)
+                    .fixedSize()
             } placeholder: {
                 ProgressView()
             }
@@ -23,6 +24,8 @@ struct PokemonCard: View {
                 TypeChip(chipInfo: pokemon.types.first!)
                 if pokemon.types.count > 1 {
                     TypeChip(chipInfo: PokemonModel.mock().types.last!)
+                } else {
+                    Spacer().frame(height: 35)
                 }
             }
         }

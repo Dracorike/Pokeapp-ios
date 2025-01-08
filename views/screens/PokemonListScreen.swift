@@ -24,6 +24,12 @@ struct PokemonListScreen : View{
                             }
                     }
                 }
+                
+                HStack {
+                    Spacer()
+                    Text("Loading...")
+                    Spacer()
+                }
             }
             .navigationTitle(Text("Pokemon List"))
         } detail: {
@@ -33,9 +39,12 @@ struct PokemonListScreen : View{
 }
 
 #Preview {
-    PokemonListScreen(pokemonList: [
-        PokemonModel.mock(),
-        PokemonModel.mock(),
-        PokemonModel.mock()
-    ], callMorePokemons: { poke in })
+    PokemonListScreen(
+        pokemonList: [
+            PokemonModel.mock(),
+            PokemonModel.mock(),
+            PokemonModel.mock()
+        ],
+        callMorePokemons: { poke in }
+    )
 }

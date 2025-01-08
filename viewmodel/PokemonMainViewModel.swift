@@ -9,36 +9,38 @@ import Foundation
 class PokemonMainViewModel : ObservableObject{
     @Published var pokemons : [PokemonModel] = []
     @Published var isLoading : Bool = false
-    var nextListInProgress: Bool = false
     
     private let pokemonService:PokemonServiceImplementation = PokemonServiceImplementation()
     
     func callPokemonList() {
         Task {
-            nextListInProgress = true
+            await MainActor.run {
+                isLoading = true
+            }
             let pokemonList = await pokemonService.fetchPokemonList()
 
             await MainActor.run {
                 pokemons.append(contentsOf: pokemonList)
+                isLoading = false
             }
-            nextListInProgress = false
         }
     }
     
     func callNextPokemonList() {
         Task {
-            nextListInProgress = true
+            await MainActor.run {
+                isLoading = true
+            }
             let morePokemons = await pokemonService.fetchNextPokemonList()
-            print("Next")
             
             await MainActor.run {
                 pokemons.append(contentsOf: morePokemons)
+                isLoading = false
             }
-            nextListInProgress = false
         }
     }
     
     func canCallNextPokemonList(pokemon:PokemonModel) -> Bool {
-        return pokemons.last?.id == pokemon.id && nextListInProgress == false
+        return pokemons.last?.id == pokemon.id && !isLoading
     }
 }
